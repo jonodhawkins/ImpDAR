@@ -151,7 +151,7 @@ def load_bsi(fn_h5, XIPR=True, channel=0., line=None, nans=None, *args, **kwargs
                     else:
                         lon[location_num] = np.nan
                     time[location_num] = float(_xmlGetVal(gps_data, gps_timestamp_str))
-                    h5_data.elev[location_num] = float(_xmlGetVal(gps_data, alt_asl))
+                    h5_data.elev[location_num] = float(_xmlGetVal(gps_data, alt_asl)) if _xmlGetVal(gps_data, alt_asl) != '' else np.nan
                 else:
                     lat[location_num] = np.nan
                     lon[location_num] = np.nan
