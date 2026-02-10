@@ -543,7 +543,7 @@ def constant_space(self, spacing, min_movement=1.0e-2, show_nomove=False):
 
     new_dists = np.arange(np.min(temp_dist),
                           np.max(temp_dist),
-                          step=spacing / 1000.0)
+                          step=spacing)
 
     # interp1d can only handle real values
     if np.iscomplexobj(self.data.dtype):
@@ -552,6 +552,7 @@ def constant_space(self, spacing, min_movement=1.0e-2, show_nomove=False):
         self.data = interp1d(temp_dist, self.data[:, good_vals])(new_dists)
 
     for attr in ['lat', 'long', 'x_coord', 'y_coord', 'decday', 'pressure', 'trig']:
+        print(attr)
         setattr(self,
                 attr,
                 interp1d(temp_dist, getattr(self, attr)[good_vals])(new_dists))
